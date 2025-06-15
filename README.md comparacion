@@ -1,0 +1,17 @@
+# Comparación entre Programación Tradicional y Programación Orientada a Objetos (POO)
+
+El repositorio tiene dos versiones de un programa en Python que calcula el promedio semanal de la temperatura.
+
+## Programación Tradicional
+
+- Utiliza funciones independientes para realizar tareas específicas, como ingresar datos y calcular el promedio.
+- El flujo del programa es secuencial y más fácil de seguir en programas pequeños.
+- Es adecuada para problemas simples que no requieren reutilización de código.
+- No permite estructurar los datos de forma avanzada.
+
+## Programación Orientada a Objetos (POO)
+
+- Utiliza clases y objetos para organizar tanto los datos como los métodos relacionados.
+- Permite aplicar conceptos como encapsulamiento, herencia y polimorfismo.
+- Facilita la reutilización y el mantenimiento del código, especialmente en programas más grandes.
+- Es ideal para estructuras de datos más complejas o proyectos con múltiples funcionalidades.
