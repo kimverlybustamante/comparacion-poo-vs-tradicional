@@ -1,0 +1,40 @@
+# Estudio de Baile - Gestión de Clases y Estudiantes
+
+Proyecto en Python para administrar un estudio de baile con clases y estudiantes.
+
+## Funcionalidades
+- Crear estudiantes con nombre y nivel.
+- Crear clases de baile con nombre y estilo.
+- Inscribir estudiantes en clases.
+- Mostrar clases disponibles.
+- Mostrar estudiantes inscritos.
+- Mostrar resumen completo del estudio.
+
+## Uso básico
+
+1. Crear EstudioDeBaile.
+2. Crear ClaseDeBaile.
+3. Agregar clases al estudio.
+4. Crear Estudiante.
+5. Inscribir estudiantes en clases.
+6. Mostrar clases y estudiantes.
+
+## Ejemplo
+
+```python
+estudio = EstudioDeBaile("Estudio Kimverly Dance")
+
+clase1 = ClaseDeBaile("Clases de K-Pop", "K-Pop")
+clase2 = ClaseDeBaile("Taller de Hip-Hop", "Hip-Hop")
+
+estudio.agregar_clase(clase1)
+estudio.agregar_clase(clase2)
+
+estudiante1 = Estudiante("Kimverly", "Intermedio")
+estudiante2 = Estudiante("Alex", "Principiante")
+
+clase1.inscribir_estudiante(estudiante1)
+clase2.inscribir_estudiante(estudiante2)
+
+estudio.mostrar_clases()
+estudio.mostrar_todo()
