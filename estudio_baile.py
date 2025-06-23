@@ -1,5 +1,5 @@
 class Estudiante:
-    def _init_(self, nombre, nivel):
+    def __init__(self, nombre, nivel):
         self.nombre = nombre
         self.nivel = nivel
 
@@ -7,7 +7,7 @@ class Estudiante:
         print(f"Estudiante: {self.nombre} - Nivel: {self.nivel}")
 
 class ClaseDeBaile:
-    def _init_(self, nombre_clase, estilo):
+    def __init__(self, nombre_clase, estilo):
         self.nombre_clase = nombre_clase
         self.estilo = estilo
         self.estudiantes = []
@@ -25,7 +25,7 @@ class ClaseDeBaile:
                 print(f"  - {e.nombre} (Nivel: {e.nivel})")
 
 class EstudioDeBaile:
-    def _init_(self, nombre_estudio):
+    def __init__(self, nombre_estudio):
         self.nombre_estudio = nombre_estudio
         self.clases = []
 
@@ -44,7 +44,7 @@ class EstudioDeBaile:
             clase.mostrar_estudiantes()
         print("---------------------------------------------------------------\n")
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     estudio = EstudioDeBaile("Estudio Kimverly Dance")
     clase1 = ClaseDeBaile("Clases de K-Pop", "K-Pop")
     clase2 = ClaseDeBaile("Taller de Hip-Hop", "Hip-Hop")
