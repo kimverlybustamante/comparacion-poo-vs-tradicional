@@ -1,18 +1,17 @@
-# Menú interactivo para la gestión de inventario en una tienda de ropa y maquillaje
 from inventario import Inventario
 from producto import Producto
 
 def cargar_inventario_inicial(inventario):
-    """Función para precargar algunos productos de ropa y maquillaje"""
-    inventario:(Producto("101", "Blusa roja", "ropa", 15, 29))
-    inventario:(Producto("102", "Pantalón jeans", "ropa", 20, 39))
-    inventario:(Producto("201", "Labial mate rosa", "maquillaje", 30, 12))
-    inventario:(Producto("202", "Sombra de ojos nude", "maquillaje", 25, 18))
-
+    """Precarga productos de ejemplo solo si el inventario está vacío."""
+    if not inventario.lista_productos:
+        inventario.agregar(Producto("101", "Blusa roja", "ropa", 15, 29))
+        inventario.agregar(Producto("102", "Pantalón jeans", "ropa", 20, 39))
+        inventario.agregar(Producto("201", "Labial mate rosa", "maquillaje", 30, 12))
+        inventario.agregar(Producto("202", "Sombra de ojos nude", "maquillaje", 25, 18))
 
 def ejecutar_menu():
     inventario = Inventario()
-    cargar_inventario_inicial(inventario)  # <<< Precarga los productos
+    cargar_inventario_inicial(inventario)  # Solo si está vacío
 
     while True:
         print("\n===== SISTEMA DE INVENTARIO - TIENDA DE ROPA Y MAQUILLAJE =====")
@@ -30,10 +29,13 @@ def ejecutar_menu():
             id_prod = input("ID del producto: ")
             nombre = input("Nombre del producto: ")
             categoria = input("Categoría (ropa/maquillaje): ")
-            cantidad = int(input("Cantidad disponible: "))
-            precio = float(input("Precio: "))
-            nuevo = Producto(id_prod, nombre, categoria, cantidad, precio)
-            inventario.agregar(nuevo)
+            try:
+                cantidad = int(input("Cantidad disponible: "))
+                precio = float(input("Precio: "))
+                nuevo = Producto(id_prod, nombre, categoria, cantidad, precio)
+                inventario.agregar(nuevo)
+            except ValueError:
+                print("Error: La cantidad y el precio deben ser números válidos.")
 
         elif opcion == "2":
             id_prod = input("ID del producto a eliminar: ")
@@ -43,9 +45,12 @@ def ejecutar_menu():
             id_prod = input("ID del producto a actualizar: ")
             cantidad = input("Nueva cantidad (Enter para no cambiar): ")
             precio = input("Nuevo precio (Enter para no cambiar): ")
-            cantidad = int(cantidad) if cantidad else None
-            precio = float(precio) if precio else None
-            inventario.actualizar(id_prod, cantidad, precio)
+            try:
+                cantidad = int(cantidad) if cantidad else None
+                precio = float(precio) if precio else None
+                inventario.actualizar(id_prod, cantidad, precio)
+            except ValueError:
+                print("Error: La cantidad y el precio deben ser números válidos.")
 
         elif opcion == "4":
             nombre = input("Nombre a buscar: ")
@@ -61,6 +66,5 @@ def ejecutar_menu():
         else:
             print("Opción inválida. Intenta de nuevo.")
 
-
-if __name__ == "__main__":
+if __name__ == "_main_":
     ejecutar_menu()

@@ -1,11 +1,8 @@
-# Clase que representa un producto en la tienda de ropa y maquillaje
-
 class Producto:
     def _init_(self, id_producto, nombre, categoria, cantidad, precio):
-        # Atributos básicos del producto
         self.id = id_producto
         self.nombre = nombre
-        self.categoria = categoria   # Puede ser "ropa" o "maquillaje"
+        self.categoria = categoria   # "ropa" o "maquillaje"
         self.cantidad = cantidad
         self.precio = precio
 
@@ -38,6 +35,17 @@ class Producto:
     def cambiar_precio(self, nuevo_precio):
         self.precio = nuevo_precio
 
-    # Representación del producto al imprimirlo
+    # Representación del producto
     def _str_(self):
         return f"[{self.id}] {self.nombre} ({self.categoria}) - Cantidad: {self.cantidad}, Precio: ${self.precio:.2f}"
+
+    # Método para guardar en archivo
+    def to_linea(self):
+        """Devuelve una línea que puede escribirse en el archivo"""
+        return f"{self.id},{self.nombre},{self.categoria},{self.cantidad},{self.precio}\n"
+
+    # Método para crear un producto desde una línea de archivo
+    @classmethod
+    def from_linea(cls, linea):
+        id_producto, nombre, categoria, cantidad, precio = linea.strip().split(',')
+        return cls(int(id_producto), nombre, categoria, int(cantidad), float(precio))

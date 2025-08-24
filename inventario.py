@@ -1,23 +1,51 @@
-# Clase que gestiona los productos de la tienda
 from producto import Producto
+import os
 
 class Inventario:
-    def _init_(self):
+    def _init_(self, archivo="inventario.txt"):
         self.lista_productos = []
+        self.archivo = archivo
+        self.cargar_inventario()
+
+    def cargar_inventario(self):
+        """Carga los productos desde el archivo."""
+        if not os.path.exists(self.archivo):
+            with open(self.archivo, 'w') as f:
+                pass  # Crear archivo vacío si no existe
+        try:
+            with open(self.archivo, 'r') as f:
+                for linea in f:
+                    if linea.strip():
+                        producto = Producto.from_linea(linea)
+                        self.lista_productos.append(producto)
+            print("Inventario cargado correctamente.")
+        except (FileNotFoundError, PermissionError, IOError) as e:
+            print(f"Error al cargar el inventario: {e}")
+
+    def guardar_inventario(self):
+        """Guarda todos los productos en el archivo."""
+        try:
+            with open(self.archivo, 'w') as f:
+                for producto in self.lista_productos:
+                    f.write(producto.to_linea())
+            print("Inventario guardado correctamente.")
+        except (PermissionError, IOError) as e:
+            print(f"Error al guardar el inventario: {e}")
 
     def agregar(self, producto):
-        # Verificar que el ID sea único
         if any(p.obtener_id() == producto.obtener_id() for p in self.lista_productos):
             print("Error: Ya existe un producto con ese ID.")
         else:
             self.lista_productos.append(producto)
+            self.guardar_inventario()
             print("Producto agregado correctamente.")
 
     def eliminar(self, id_producto):
         for p in self.lista_productos:
             if p.obtener_id() == id_producto:
                 self.lista_productos.remove(p)
-                print("Producto eliminado.")
+                self.guardar_inventario()
+                print("Producto eliminado correctamente.")
                 return
         print("No se encontró ningún producto con ese ID.")
 
@@ -28,7 +56,8 @@ class Inventario:
                     p.cambiar_cantidad(nueva_cantidad)
                 if nuevo_precio is not None:
                     p.cambiar_precio(nuevo_precio)
-                print("Producto actualizado.")
+                self.guardar_inventario()
+                print("Producto actualizado correctamente.")
                 return
         print("No se encontró ningún producto con ese ID.")
 
